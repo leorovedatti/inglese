@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#0B0D18">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Inglese B1">
+<title>Inglese B1 - allenamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --paper:#0B0D18; --grid:#151A2C; --card:#141A30; --ink:#F2F5FF; --muted:#A6AFCF; --line:#2B3356;
+  --hl:#FF2FD1; --hlsoft:#3A1236; --neon:#C6FF00; --ok:#39FF88; --oksoft:#0F3524; --ko:#FF4D6D; --kosoft:#3D1220; --accent:#00E5FF;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  color:var(--ink);
+  font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:17px; line-height:1.6;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.wrap{max-width:660px;margin:0 auto;padding:22px 16px 56px}
+h1{font-size:1.85rem;line-height:1.2;margin:6px 0 10px}
+h2{font-size:1.25rem;line-height:1.3;margin:28px 0 10px}
+h3{font-size:1.1rem;margin:18px 0 6px;color:var(--accent)}
+.mark{background:var(--neon);color:#0B0D18;border-radius:4px;padding:0 .25em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}
+.tip{border-left:6px solid var(--hl)}
+.warn{border:2px solid var(--ko);background:var(--kosoft)}
+.btn{display:inline-block;font:inherit;font-weight:700;border:2px solid var(--neon);background:var(--neon);color:#0B0D18;border-radius:12px;padding:12px 18px;cursor:pointer;margin:6px 8px 6px 0}
+.btn.alt{background:transparent;color:var(--accent);border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.back{background:none;border:none;color:var(--accent);font:inherit;font-weight:700;padding:6px 0;cursor:pointer}
+.day{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;font:inherit;color:var(--ink);cursor:pointer}
+.day .n{flex:0 0 40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid var(--accent);color:var(--accent)}
+.day.done .n{background:var(--hl);border-color:var(--hl);color:#0B0D18;box-shadow:0 0 12px var(--hl)}
+.day.next{border:2px solid var(--neon);box-shadow:0 0 14px rgba(198,255,0,.35)}
+.day .t{flex:1}
+.day .t b{display:block;line-height:1.3}
+.day .t small{color:var(--muted)}
+.score{font-size:.85rem;color:var(--muted);white-space:nowrap}
+.steps{display:flex;gap:8px;margin:8px 0 4px}
+.steps span{flex:1;text-align:center;font-size:.85rem;padding:6px;border-radius:8px;border:1px solid var(--line);color:var(--muted)}
+.steps span.on{border-color:var(--hl);color:var(--hl);font-weight:700;background:var(--hlsoft)}
+.word{font-size:2rem;font-weight:700;margin:8px 0 14px;color:var(--accent);text-shadow:0 0 12px rgba(0,229,255,.45)}
+.opt{display:block;width:100%;text-align:left;font:inherit;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:var(--oksoft)}
+.opt.ko{border-color:var(--ko);background:var(--kosoft)}
+.text p{font-size:1.05rem;line-height:2}
+.gapn{color:var(--muted);font-size:.85em;font-weight:700}
+input.gap{font:inherit;font-weight:700;color:var(--ink);background:#0A1222;border:2px solid var(--accent);border-radius:8px;padding:1px 6px;margin:2px 0;width:8.5em;max-width:60vw}
+input.gap.ok{border-color:var(--ok);background:var(--oksoft)}
+input.gap.ko{border-color:var(--ko);background:var(--kosoft)}
+.bank{display:flex;flex-wrap:wrap;gap:8px}
+.bank span{border:2px solid var(--hl);color:var(--ink);border-radius:999px;padding:4px 12px;font-weight:700}
+.fb{list-style:none;padding:0;margin:0}
+.fb li{border-radius:10px;padding:10px 12px;margin:8px 0}
+.fb li.ok{background:var(--oksoft)}
+.fb li.ko{background:var(--kosoft)}
+.player{display:flex;flex-wrap:wrap;gap:8px}
+.result{font-size:1.4rem;font-weight:700;color:var(--neon)}
+.reset{background:none;border:none;color:var(--muted);font:inherit;text-decoration:underline;cursor:pointer;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+// ================= CONTENUTI =================
+// [[n]] = spazio da completare. bank = parole nella forma base (2 sono in più).
+const DAYS = [
+// ---------- SETTIMANA 1 ----------
+{ id:1, week:1, weekday:"Lunedì", title:"The Vajont Dam disaster",
+  vocab:[["dam","diga"],["landslide","frana"],["wave","onda"],["valley","valle"],["engineer","ingegnere"],["to destroy","distruggere"]],
+  text:`The Vajont Dam is in the north-east of Italy, on the border between Veneto and Friuli. When it was [[1]], at the end of the 1950s, it was one of the [[2]] dams in the world. Its job was to produce electricity for the [[3]] industries of northern Italy.
+
+However, the mountain next to the lake, Monte Toc, was not [[4]]. Some experts were [[5]] about landslides, but the work continued. On the night of 9 October 1963, a huge landslide [[6]] into the lake. About 260 million cubic metres of rock moved into the water in less than a minute. The water created an enormous wave that went over the top of the dam.
+
+The dam itself did not [[7]], but the wave destroyed the town of Longarone and several villages in the valley below. Almost 2,000 people [[8]]. Today engineers and geologists all over the world study this disaster, because it shows that every project must consider the geology of the area.`,
+  bank:["build","tall","grow","stable","worry","fall","break","die","swim","happy"],
+  answers:{1:["built"],2:["tallest"],3:["growing"],4:["stable"],5:["worried"],6:["fell"],7:["break"],8:["died"]},
+  expl:{1:"Forma passiva: was + participio. Build è irregolare: build, built, built.",2:"Superlativo: one of the + aggettivo + -est. Tall → tallest.",3:"Aggettivo in -ing: growing industries = industrie in crescita.",4:"Aggettivo dopo \"was not\": stable = stabile.",5:"Be worried about = essere preoccupati per.",6:"Past simple irregolare: fall → fell.",7:"Dopo did not il verbo resta nella forma base.",8:"Past simple regolare: die → died."}},
+{ id:2, week:1, weekday:"Martedì", title:"Three man-made disasters",
+  vocab:[["factory","fabbrica"],["to spread","diffondersi"],["reef","scogliera"],["coast","costa"],["safety","sicurezza"],["to evacuate","evacuare"]],
+  text:`## Bhopal, India (1984)
+On the night of 2-3 December 1984, a dangerous gas [[1]] from a pesticide factory in the city of Bhopal. The gas [[2]] over the city while people [[3]] sleeping. Thousands of people died in the first days, and many more suffered from eye and [[4]] problems for the rest of their lives. The factory was old and the safety systems were not working properly.
+
+## Exxon Valdez, Alaska (1989)
+In March 1989 the oil tanker Exxon Valdez [[5]] a reef in Alaska. Millions of litres of oil went into the sea. The oil covered more than 2,000 km of coast and [[6]] hundreds of thousands of seabirds, as well as otters and seals.
+
+## Fukushima, Japan (2011)
+In March 2011 a very [[7]] earthquake caused a tsunami that hit the coast of Japan. The water damaged the Fukushima nuclear power plant, and three reactors went into meltdown. More than 100,000 people were [[8]] from the area around the plant, and some areas are still closed today.`,
+  bank:["escape","spread","be","breathe","hit","kill","strong","evacuate","weak","build"],
+  answers:{1:["escaped"],2:["spread"],3:["were"],4:["breathing"],5:["hit"],6:["killed"],7:["strong"],8:["evacuated"]},
+  expl:{1:"Past simple regolare: escape → escaped.",2:"Spread è irregolare ma resta uguale: spread, spread, spread.",3:"Past continuous: were + -ing. People è plurale, quindi were.",4:"Breathing problems = problemi respiratori. La forma -ing fa da aggettivo.",5:"Hit è irregolare e resta uguale al passato: hit, hit, hit.",6:"Past simple regolare: kill → killed.",7:"Aggettivo: a very strong earthquake = un terremoto molto forte.",8:"Forma passiva: were + participio. Evacuate → evacuated."}},
+{ id:3, week:1, weekday:"Mercoledì", title:"The Amazon rainforest",
+  vocab:[["rainforest","foresta pluviale"],["to cut down","abbattere"],["soil","terreno"],["cattle","bestiame"],["wood","legno"],["to absorb","assorbire"]],
+  text:`The Amazon rainforest is the [[1]] tropical forest in the world, and it is home to millions of species of plants and animals. It is often called 'the lungs of the planet' because its trees [[2]] huge amounts of carbon dioxide.
+
+In the last fifty years, however, a large part of the forest has been [[3]] down. Farmers clear the land to [[4]] soya and to raise cattle, and companies cut the trees to sell the wood. When the trees [[5]], the soil becomes [[6]] and the rain washes it away. This is the same problem of soil erosion that the farmers of the Dust Bowl had in the 1930s.
+
+Many governments and organisations are now [[7]] to protect the forest. More than 100 countries have [[8]] to stop deforestation by 2030. If we don't act quickly, the damage could become permanent.`,
+  bank:["large","absorb","cut","grow","disappear","poor","try","promise","rich","forget"],
+  answers:{1:["largest"],2:["absorb"],3:["cut"],4:["grow"],5:["disappear"],6:["poor"],7:["trying"],8:["promised"]},
+  expl:{1:"Superlativo: the largest = la più grande.",2:"Presente con soggetto plurale (its trees): niente -s.",3:"Passivo has been + participio. Cut resta uguale: cut, cut, cut.",4:"Dopo to il verbo è nella forma base.",5:"Presente con soggetto plurale (the trees): niente -s.",6:"Il terreno diventa povero: poor. Rich (ricco) è il contrario.",7:"Are + -ing: trying. La y resta.",8:"Present perfect: have + participio. Promise → promised."}},
+{ id:4, week:1, weekday:"Giovedì", title:"The Great Smog of London",
+  vocab:[["fog","nebbia"],["smoke","fumo"],["coal","carbone"],["heating","riscaldamento"],["breathing","respirazione"],["law","legge"]],
+  text:`In December 1952 a [[1]], yellow-black fog covered London for five days. At that time most houses [[2]] coal for heating, and factories and power stations also [[3]] coal. The weather was very cold and there was no wind, so the smoke [[4]] close to the ground and mixed with the fog.
+
+People couldn't [[5]] more than a few metres in front of them. Buses and cars stopped, and many people had to walk home. Even inside buildings the air was [[6]]: some shows were cancelled because the audience couldn't see the stage.
+
+In the following weeks, around 4,000 people died, [[7]] old people and people with breathing problems. Later studies suggest that the real number was much [[8]]. The disaster changed British law: in 1956 the government introduced the Clean Air Act, which limited the burning of coal in cities.`,
+  bank:["thick","use","burn","stay","see","dirty","mostly","high","clean","quickly"],
+  answers:{1:["thick"],2:["used"],3:["burned","burnt"],4:["stayed"],5:["see"],6:["dirty"],7:["mostly"],8:["higher"]},
+  expl:{1:"Aggettivo: a thick fog = una nebbia densa.",2:"Si parla del passato: use → used.",3:"Past simple: burned oppure burnt, vanno bene tutte e due.",4:"Past simple regolare: stay → stayed.",5:"Dopo couldn't il verbo resta nella forma base.",6:"L'aria era sporca: dirty. Clean è il contrario.",7:"Mostly = soprattutto, per la maggior parte.",8:"Comparativo: much higher = molto più alto."}},
+{ id:5, week:1, weekday:"Venerdì", title:"Drought in northern Italy", listen:true,
+  vocab:[["drought","siccità"],["crop","coltivazione, raccolto"],["field","campo"],["pipe","tubo"],["landslide","frana"],["soil","terreno"]],
+  text:`In the summer of 2022, northern Italy had one of the [[1]] droughts in its history. For months it hardly [[2]], and in the Alps there had been very [[3]] snow during the winter. The Po, Italy's [[4]] river, reached its lowest level in about seventy years. In some places people could walk across the river bed, and the low water revealed old boats and even a bomb from the Second World War. Farmers couldn't [[5]] their fields, and crops like rice and corn suffered a lot. Some towns had to [[6]] the use of water at home. Experts say that droughts like this one will become more [[7]] because of climate change. So we need to use water more [[8]] and repair old water pipes, which lose a lot of water every day.`,
+  bank:["bad","rain","little","long","water","limit","frequent","careful","much","quick"],
+  answers:{1:["worst"],2:["rained"],3:["little"],4:["longest"],5:["water"],6:["limit"],7:["frequent"],8:["carefully"]},
+  expl:{1:"Superlativo irregolare: bad, worse, the worst.",2:"Past simple: rain → rained.",3:"Little si usa con le cose che non si contano, come snow.",4:"Superlativo: long → the longest.",5:"Qui water è un verbo: irrigare, dare acqua. Dopo couldn't resta base.",6:"Dopo had to il verbo è nella forma base.",7:"Aggettivo: more frequent = più frequenti.",8:"Avverbio in -ly perché descrive il verbo use: carefully = con attenzione."}},
+// ---------- SETTIMANA 2 ----------
+{ id:6, week:2, weekday:"Lunedì", title:"Venice and overtourism",
+  vocab:[["resident","residente"],["rent","affitto"],["cruise ship","nave da crociera"],["entrance fee","biglietto d'ingresso"],["balance","equilibrio"],["day-tripper","turista di un giorno"]],
+  text:`Venice is one of the most [[1]] cities in the world. Every year millions of tourists come to see its canals and palaces. But the city has a big problem: there are too many visitors and [[2]] and fewer residents. Today fewer than 50,000 people [[3]] in the historic centre, while in the 1950s there were about 175,000.
+
+Many houses have [[4]] holiday apartments, because owners can [[5]] more money from tourists than from people who live there all year. Shops for residents close, and souvenir shops open.
+
+For years, huge cruise ships also passed in front of St Mark's Square. In 2021 the government [[6]] large cruise ships from the centre of the lagoon. In 2024 Venice became the first city in the world to introduce an entrance [[7]] for day-trippers on the [[8]] days.
+
+Some people think it is a good idea; others say that a city is not a museum. What is sure is that Venice needs a better balance between tourists and residents.`,
+  bank:["visit","few","live","become","earn","ban","fee","busy","spend","cheap"],
+  answers:{1:["visited"],2:["fewer"],3:["live"],4:["become"],5:["earn"],6:["banned"],7:["fee"],8:["busiest"]},
+  expl:{1:"The most visited = le più visitate. Serve il participio.",2:"Fewer and fewer = sempre meno (con cose che si contano).",3:"Presente con soggetto plurale (people): niente -s.",4:"Present perfect: have + participio. Become è irregolare: become, became, become.",5:"Dopo can il verbo è nella forma base. Earn = guadagnare.",6:"Past simple: ban → banned (raddoppia la n).",7:"Entrance fee = tassa d'ingresso.",8:"Superlativo: busy → the busiest (la y diventa i)."}},
+{ id:7, week:2, weekday:"Martedì", title:"Three popular destinations",
+  vocab:[["flat","appartamento"],["protest","protesta"],["waterfall","cascata"],["glacier","ghiacciaio"],["path","sentiero"],["crowded","affollato"]],
+  text:`## Barcelona, Spain
+Barcelona [[1]] millions of tourists every year. Many residents say that rents have become too [[2]], because a lot of flats are rented to tourists. In 2024 thousands of people [[3]] part in protests in the streets, and the city decided to stop renting flats to tourists by 2028.
+
+## Iceland
+Iceland has only about 400,000 [[4]], but it receives around two million visitors a year. Tourists come to see glaciers, volcanoes and waterfalls. The government asks visitors to stay on marked paths and to [[5]] nature, because plants grow very [[6]] in the cold climate.
+
+## Cinque Terre, Italy
+The Cinque Terre are five small villages on the coast of Liguria. They are connected by [[7]] paths along the cliffs. In summer the paths and the trains are often very [[8]]. To use the most famous paths, visitors must buy a card, and the money is used to maintain the paths and protect the landscape.`,
+  bank:["welcome","expensive","take","inhabitant","respect","slow","narrow","crowd","cheap","quick"],
+  answers:{1:["welcomes"],2:["expensive"],3:["took"],4:["inhabitants"],5:["respect"],6:["slowly"],7:["narrow"],8:["crowded"]},
+  expl:{1:"Presente con soggetto singolare (Barcelona): aggiungi -s.",2:"Gli affitti sono troppo cari: expensive.",3:"Past simple irregolare: take → took. Take part = partecipare.",4:"Plurale: 400,000 inhabitants = abitanti.",5:"Dopo to il verbo è nella forma base.",6:"Avverbio in -ly perché descrive il verbo grow: slowly.",7:"Aggettivo: narrow paths = sentieri stretti.",8:"Da crowd (folla) viene crowded = affollato."}},
+{ id:8, week:2, weekday:"Mercoledì", title:"Ecotourism",
+  vocab:[["guesthouse","pensione, affittacamere"],["rare","raro"],["turtle","tartaruga"],["distant","lontano"],["community","comunità"],["rule","regola"]],
+  text:`Ecotourism is a type of tourism that tries to [[1]] the environment and help local communities. Ecotourists usually travel in small groups and stay in places [[2]] by local people, such as family guesthouses. They want to [[3]] about nature, not just take photos.
+
+A good example is Costa Rica, a country in Central America that has protected a [[4]] part of its territory. Visitors go there to see [[5]] birds, monkeys and turtles.
+
+However, ecotourism is not always as 'green' as it [[6]]. To reach [[7]] destinations, tourists often travel by plane, which [[8]] a lot of CO2. And when a place becomes famous, too many people may arrive. That's why experts say that real ecotourism must have clear rules, and that tourists should choose their trips carefully.`,
+  bank:["protect","run","learn","large","rare","seem","distant","produce","teach","cheap"],
+  answers:{1:["protect"],2:["run"],3:["learn"],4:["large"],5:["rare"],6:["seems"],7:["distant"],8:["produces"]},
+  expl:{1:"Dopo to il verbo è nella forma base.",2:"Places run by local people = posti gestiti da gente del posto. Run è irregolare: run, ran, run.",3:"Dopo want to il verbo è nella forma base. Learn = imparare.",4:"Aggettivo: a large part = una grande parte.",5:"Aggettivo: rare birds = uccelli rari.",6:"Presente con it: aggiungi -s. Seem = sembrare.",7:"Aggettivo: distant destinations = mete lontane.",8:"Which si riferisce a the plane, singolare: aggiungi -s."}},
+{ id:9, week:2, weekday:"Giovedì", title:"Machu Picchu",
+  vocab:[["ancient","antico"],["sea level","livello del mare"],["in advance","in anticipo"],["guide","guida"],["trail","percorso, sentiero"],["limited","limitato"]],
+  text:`Machu Picchu is an [[1]] Inca city in the mountains of Peru, at about 2,400 metres above sea level. It was [[2]] in the 15th century, and it became [[3]] around the world after 1911, when the American explorer Hiram Bingham visited it.
+
+Today it is one of the most [[4]] tourist sites in South America. Because so many people want to visit it, the government of Peru has [[5]] strict rules. Visitors must buy a ticket in [[6]] for a specific time, and the number of tickets per day is [[7]]. In most cases visitors must also enter with a licensed guide and follow fixed routes.
+
+Many tourists reach the site by train and then by bus, while others prefer to walk the Inca Trail, a path that [[8]] about four days. The number of hikers on the trail is also limited.`,
+  bank:["ancient","build","famous","popular","introduce","advance","limit","take","modern","forget"],
+  answers:{1:["ancient"],2:["built"],3:["famous"],4:["popular"],5:["introduced"],6:["advance"],7:["limited"],8:["takes"]},
+  expl:{1:"Dopo an serve una parola che inizia con vocale: ancient = antica.",2:"Passivo: was + participio. Build → built.",3:"Became famous = divenne famosa.",4:"One of the most popular = uno dei più popolari.",5:"Present perfect: has + participio. Introduce → introduced.",6:"In advance = in anticipo.",7:"Is limited = è limitato.",8:"Presente con a path (singolare): takes. Take qui significa richiedere tempo."}},
+{ id:10, week:2, weekday:"Venerdì", title:"Slow travel", listen:true,
+  vocab:[["journey","viaggio"],["to pollute","inquinare"],["to enjoy","godersi"],["crowded","affollato"],["entrance fee","biglietto d'ingresso"],["balance","equilibrio"]],
+  text:`Slow travel is a way of travelling that is becoming more and more [[1]], especially among young people. The idea is simple: [[2]] of visiting ten cities in a week, you choose one place and stay there [[3]]. Slow travellers prefer trains, buses or bikes to planes, because they want to [[4]] the journey and pollute [[5]]. They often stay in small hotels or with local families, eat in local restaurants and buy products from local markets. In this way, the money they [[6]] stays in the community. For example, instead of a quick weekend in a big city, you could spend a week [[7]] along a mountain path and sleeping in small villages. You see fewer famous places, but you have a [[8]] experience, and you meet the people who live there.`,
+  bank:["popular","instead","long","enjoy","little","spend","walk","deep","fast","more"],
+  answers:{1:["popular"],2:["instead"],3:["longer"],4:["enjoy"],5:["less"],6:["spend"],7:["walking"],8:["deeper"]},
+  expl:{1:"More and more popular = sempre più popolare.",2:"Instead of = invece di.",3:"Comparativo: long → longer = più a lungo.",4:"Dopo want to il verbo è nella forma base.",5:"Less = meno. È il comparativo di little.",6:"Presente con they: niente -s. Spend = spendere.",7:"Spend + tempo + verbo in -ing: spend a week walking.",8:"Comparativo: deep → deeper = più profonda."}},
+// ---------- SETTIMANA 3 ----------
+{ id:11, week:3, weekday:"Lunedì", title:"The Great Green Wall",
+  vocab:[["desert","deserto"],["to plant","piantare"],["root","radice"],["farmland","terreno agricolo"],["wind","vento"],["sand","sabbia"]],
+  text:`In the Sahel, the region just south of the Sahara desert, the land is becoming [[1]] every year. Because of droughts, climate change and the cutting of trees, the desert is [[2]] south and good farmland is disappearing. This process is called desertification.
+
+In 2007 the African Union started an ambitious project: the Great Green Wall. The idea was to [[3]] a line of trees about 8,000 km long, across the whole continent, from Senegal in the west to Djibouti in the east. The trees protect the land from the wind and the sand, because their [[4]] hold the soil in place and keep water in the ground.
+
+Over time, the project [[5]]. Instead of a simple line of trees, it now includes many different green areas, like gardens, farms and small forests. Local people are [[6]], because they are the ones who live on the land every day.
+
+The project has had some success, but it is much [[7]] than planned. Many young trees die because nobody [[8]] them. Experts say that the Great Green Wall will only work if local communities can earn money from it.`,
+  bank:["dry","move","plant","root","change","involve","slow","water","wet","cut"],
+  answers:{1:["drier","dryer"],2:["moving"],3:["plant"],4:["roots"],5:["changed"],6:["involved"],7:["slower"],8:["waters"]},
+  expl:{1:"Comparativo: dry → drier = più secca.",2:"Present continuous: is + -ing.",3:"Dopo to il verbo è nella forma base.",4:"Plurale dopo their: roots = radici.",5:"Past simple: change → changed.",6:"Are involved = sono coinvolti.",7:"Comparativo con than: slower than = più lento di.",8:"Nobody vuole il verbo al singolare: waters (water qui è un verbo, annaffiare)."}},
+{ id:12, week:3, weekday:"Martedì", title:"Three famous natural disasters",
+  vocab:[["volcano","vulcano"],["ash","cenere"],["flood","alluvione"],["mud","fango"],["hurricane","uragano"],["volunteer","volontario"]],
+  text:`## Pompeii, Italy (79 AD)
+In 79 AD the volcano Vesuvius [[1]] near the Roman city of Pompeii. Ash and stones [[2]] on the city for hours and covered it completely. Many inhabitants escaped, but many others died. The city stayed under the ash for centuries, and today it is one of the most visited archaeological sites in the world.
+
+## Florence, Italy (1966)
+On 4 November 1966, after days of [[3]] rain, the river Arno flooded the city of Florence. In some streets the water was more than four metres [[4]]. Mud [[5]] thousands of paintings and millions of old books. Young volunteers came from all over Italy and the world to [[6]] them: people called them the 'mud angels'.
+
+## New Orleans, USA (2005)
+In August 2005 Hurricane Katrina hit the south of the United States. In New Orleans the walls that [[7]] the city from the water broke, and about 80% of the city was flooded. More than 1,800 people died, and hundreds of thousands had to [[8]] their homes. Many of them never came back.`,
+  bank:["erupt","fall","heavy","high","damage","save","protect","leave","light","arrive"],
+  answers:{1:["erupted"],2:["fell"],3:["heavy"],4:["high"],5:["damaged"],6:["save"],7:["protected"],8:["leave"]},
+  expl:{1:"Past simple: erupt → erupted = eruttò.",2:"Past simple irregolare: fall → fell.",3:"Heavy rain = pioggia forte.",4:"Four metres high = alta quattro metri.",5:"Past simple: damage → damaged = danneggiò.",6:"Dopo to il verbo è nella forma base. Save = salvare.",7:"Past simple: protect → protected.",8:"Dopo had to il verbo è nella forma base. Leave = lasciare."}},
+{ id:13, week:3, weekday:"Mercoledì", title:"Plastic in the oceans",
+  vocab:[["rubbish","spazzatura"],["to throw away","buttare via"],["straw","cannuccia"],["bin","bidone"],["packaging","imballaggio"],["habit","abitudine"]],
+  text:`Every year millions of tonnes of plastic [[1]] up in the oceans. Most of it comes from the land: rubbish is [[2]] by rivers or by the wind, or it is thrown away by people on beaches. Plastic is very [[3]], so it takes hundreds of years to disappear. In the meantime it breaks down into very small pieces called microplastics.
+
+Sea animals often think that plastic is food. Turtles, for example, eat plastic bags because they look like jellyfish. Microplastics have also been [[4]] in fish and in salt, so they can end up on our plates.
+
+What can we do? Many countries have already [[5]] single-use plastic items, such as straws and plates. But each of us can help too. We can use a [[6]] bottle, avoid products with too much packaging, and always put our rubbish in the right bin. Some studies say that, if we don't change our [[7]], by 2050 there could be [[8]] plastic than fish in the sea.`,
+  bank:["end","carry","strong","find","ban","reuse","habit","much","weak","lose"],
+  answers:{1:["end"],2:["carried"],3:["strong"],4:["found"],5:["banned"],6:["reusable"],7:["habits"],8:["more"]},
+  expl:{1:"Presente con soggetto plurale (millions of tonnes): end up = finire.",2:"Passivo: is + participio. Carry → carried (la y diventa ied).",3:"Aggettivo: la plastica è molto resistente.",4:"Passivo: have been + participio. Find è irregolare: find, found, found.",5:"Present perfect: have + participio. Ban → banned.",6:"Reuse + -able = reusable, riutilizzabile.",7:"Plurale dopo our: habits = abitudini.",8:"Comparativo di much: more ... than = più ... di."}},
+{ id:14, week:3, weekday:"Giovedì", title:"Chernobyl today",
+  vocab:[["radiation","radiazioni"],["abandoned","abbandonato"],["steel","acciaio"],["wolf","lupo"],["deer","cervo"],["strict","severo, rigido"]],
+  text:`After the explosion in 1986, the authorities [[1]] an exclusion zone of 30 km around the Chernobyl power plant. About 350,000 people had to leave their homes, and most of them never [[2]] back. The town of Pripyat, where the plant workers [[3]], is still empty today: you can see [[4]] schools, a swimming pool and an amusement park that never opened.
+
+In 2016 engineers placed a huge new steel structure over the [[5]] reactor, to stop radiation from [[6]] for the next 100 years.
+
+Surprisingly, without people, nature has come back. Scientists have [[7]] wolves, bears, deer and wild horses in the zone. Before the war in Ukraine, the area had also become a destination for tourists, who visited it on guided tours. Visitors were [[8]] to stay only for a short time and had to follow strict rules.`,
+  bank:["create","come","live","abandon","damage","escape","see","allow","build","forbid"],
+  answers:{1:["created"],2:["came"],3:["lived"],4:["abandoned"],5:["damaged"],6:["escaping"],7:["seen"],8:["allowed"]},
+  expl:{1:"Past simple: create → created.",2:"Past simple irregolare: come → came.",3:"Past simple: live → lived.",4:"Participio usato come aggettivo: abandoned schools = scuole abbandonate.",5:"Participio usato come aggettivo: the damaged reactor = il reattore danneggiato.",6:"Dopo una preposizione (from) il verbo va in -ing.",7:"Present perfect: have + participio. See è irregolare: see, saw, seen.",8:"Were allowed to = avevano il permesso di."}},
+{ id:15, week:3, weekday:"Venerdì", title:"The Val Pola landslide", listen:true,
+  vocab:[["landslide","frana"],["flood","alluvione"],["to block","bloccare"],["earth","terra"],["mud","fango"],["ash","cenere"]],
+  text:`In the summer of 1987, Valtellina, in the province of Sondrio, was [[1]] by one of the worst natural disasters in its history. In July it rained [[2]] for days, and in many places the rivers flooded the valley. On 28 July a [[3]] piece of the mountain fell into Val Pola, a side valley near Bormio. Millions of cubic metres of rock and earth [[4]] several villages. The villages directly below had already been [[5]], but the landslide pushed a wave of mud and water up the other side of the valley, and some people died. The landslide also [[6]] the river Adda and created a lake behind it. For weeks people were [[7]] that the water could break through and flood the towns below. Engineers worked day and night to let the water out [[8]]. Today the area is constantly monitored, and the disaster is remembered as an example of how important it is to study and monitor the mountains.`,
+  bank:["hit","heavy","huge","destroy","evacuate","block","afraid","slow","tiny","quick"],
+  answers:{1:["hit"],2:["heavily"],3:["huge"],4:["destroyed"],5:["evacuated"],6:["blocked"],7:["afraid"],8:["slowly"]},
+  expl:{1:"Passivo: was + participio. Hit resta uguale: hit, hit, hit.",2:"Avverbio in -ly perché descrive il verbo rained: heavily = forte.",3:"Aggettivo: huge = enorme.",4:"Past simple: destroy → destroyed.",5:"Had been + participio: erano già stati evacuati.",6:"Past simple: block → blocked.",7:"Be afraid that = avere paura che.",8:"Avverbio in -ly: slowly = lentamente."}},
+// ---------- SETTIMANA 4 ----------
+{ id:16, week:4, weekday:"Lunedì", title:"How to be a responsible tourist",
+  vocab:[["tip","consiglio"],["custom","usanza"],["shoulder","spalla"],["to waste","sprecare"],["memory","ricordo"],["to respect","rispettare"]],
+  text:`Travelling is one of the best ways to learn about the world. But every year more and more people travel, and tourism can also [[1]] the places we visit. Here are some simple tips to be a [[2]] tourist.
+
+First, learn a few words of the local language before you [[3]]. Even a simple 'hello' or 'thank you' can make people [[4]]. Second, respect local [[5]]: in some countries, for example, you must cover your shoulders when you visit a church or a temple.
+
+Third, try to spend your money in local shops, restaurants and markets. In this way, the money goes to the local community and not to big [[6]] companies. Fourth, think about the environment: use public transport when you can, don't leave rubbish on the beach and don't [[7]] water and electricity in hotels.
+
+Finally, take photos, but don't spend the whole trip [[8]] at your phone. Sometimes the best memories are the ones that you keep only in your mind.`,
+  bank:["damage","responsibility","leave","smile","custom","international","waste","look","save","arrive"],
+  answers:{1:["damage"],2:["responsible"],3:["leave"],4:["smile"],5:["customs"],6:["international"],7:["waste"],8:["looking"]},
+  expl:{1:"Dopo can il verbo è nella forma base. Damage = danneggiare.",2:"Serve l'aggettivo: responsibility (nome) → responsible (aggettivo).",3:"Before you leave = prima di partire.",4:"Make + persona + verbo base: make people smile.",5:"Plurale: local customs = usanze locali.",6:"Aggettivo: international companies = aziende internazionali.",7:"Dopo don't il verbo è nella forma base. Waste = sprecare.",8:"Spend + tempo + verbo in -ing: spend the trip looking."}},
+{ id:17, week:4, weekday:"Martedì", title:"Three different types of tourism",
+  vocab:[["farm","fattoria"],["income","guadagno, reddito"],["battlefield","campo di battaglia"],["unpaid","non pagato"],["to warn","avvertire"],["disrespectful","irrispettoso"]],
+  text:`## Agritourism
+Agritourism means [[1]] on a farm. In Italy it is very popular: guests sleep in old farmhouses, eat food [[2]] on the farm and sometimes help with work like picking grapes or making cheese. For farmers it is an extra source of [[3]], and for tourists it is a way to discover the countryside.
+
+## Dark tourism
+Dark tourism means visiting places connected to death, disasters or tragedies, such as old battlefields, concentration camps or the area around Chernobyl. Some people visit these places to learn about history and [[4]] the victims. However, critics say that some visitors are only [[5]] for strange selfies, and that this is [[6]].
+
+## Volunteer tourism
+Volunteer tourism, or 'voluntourism', combines a holiday with [[7]] work for a good cause. Volunteers may teach English in a school, build houses or help to protect turtles on a beach. It can be a great experience, but experts [[8]] that some short projects help the tourists more than the local people.`,
+  bank:["stay","produce","income","remember","look","respect","pay","warn","forget","earn"],
+  answers:{1:["staying"],2:["produced"],3:["income"],4:["remember"],5:["looking"],6:["disrespectful"],7:["unpaid"],8:["warn"]},
+  expl:{1:"Mean + verbo in -ing: means staying = significa soggiornare.",2:"Participio: food produced on the farm = cibo prodotto in fattoria.",3:"Source of income = fonte di guadagno.",4:"Forma base, come learn: to learn ... and remember.",5:"Are + -ing. Look for = cercare.",6:"Dis- + respect + -ful = disrespectful, irrispettoso.",7:"Un- + paid = unpaid, non pagato.",8:"Presente con experts (plurale): niente -s. Warn = avvertire."}},
+{ id:18, week:4, weekday:"Mercoledì", title:"Ski resorts and climate change",
+  vocab:[["altitude","altitudine"],["ski resort","località sciistica"],["artificial snow","neve artificiale"],["alternative","alternativa"],["challenge","sfida"],["wellness centre","centro benessere"]],
+  text:`For many mountain towns in the Alps, winter tourism is the most [[1]] source of income. But climate change is making winters [[2]], and there is less snow than in the past, especially at low altitudes.
+
+Many ski resorts now depend on [[3]] snow. Machines [[4]] snow from water and air, but this solution is [[5]] and uses a lot of water and energy. In some winters, low-altitude resorts have had to close early because there wasn't [[6]] snow.
+
+Some towns are looking for alternatives. Instead of focusing only on skiing, they offer activities that people can do all year round, such as hiking, mountain biking and visits to local farms. Others are [[7]] in wellness centres and cultural events.
+
+Experts say that mountain communities must start to change now, before it is too late. The challenge is to protect jobs and, at the same time, the natural environment that [[8]] the mountains so special.`,
+  bank:["importance","warm","artificial","produce","expensive","enough","invest","make","cheap","cold"],
+  answers:{1:["important"],2:["warmer"],3:["artificial"],4:["produce"],5:["expensive"],6:["enough"],7:["investing"],8:["makes"]},
+  expl:{1:"Serve l'aggettivo: importance (nome) → important.",2:"Comparativo: warm → warmer = più caldi.",3:"Artificial snow = neve artificiale.",4:"Presente con machines (plurale): niente -s.",5:"La soluzione è costosa: expensive.",6:"Enough = abbastanza.",7:"Present continuous: are + -ing. Invest in = investire in.",8:"That si riferisce a the environment (singolare): makes."}},
+{ id:19, week:4, weekday:"Giovedì", title:"Tourism and the 2030 Agenda",
+  vocab:[["goal","obiettivo"],["poverty","povertà"],["hunger","fame"],["growth","crescita"],["resources","risorse"],["coastal","costiero"]],
+  text:`In 2015 all the member states of the United Nations [[1]] the 2030 Agenda for Sustainable Development. It [[2]] 17 goals, which cover problems like poverty, hunger, education, clean energy and climate change. You can see the goals in your English book: Goal 15, for example, is 'Life on Land'.
+
+Tourism is [[3]] directly in three goals. Goal 8 is about decent work and economic [[4]]: tourism can create jobs, especially for young people and women. Goal 12 is about responsible consumption and production, which means using resources without [[5]] them. Goal 14, 'Life below Water', is about [[6]] the seas and the oceans, which are very important for coastal tourism.
+
+The goals are for governments, but also for companies and [[7]] people. Every time we [[8]] how to travel, where to sleep or what to buy on holiday, we can help the planet, or damage it.`,
+  bank:["adopt","contain","mention","grow","waste","protect","ordinary","choose","forget","rich"],
+  answers:{1:["adopted"],2:["contains"],3:["mentioned"],4:["growth"],5:["wasting"],6:["protecting"],7:["ordinary"],8:["choose"]},
+  expl:{1:"Past simple: adopt → adopted.",2:"Presente con it: aggiungi -s.",3:"Passivo: is + participio. Mention → mentioned.",4:"Serve un nome: grow (verbo) → growth (crescita).",5:"Dopo without il verbo va in -ing.",6:"Dopo about il verbo va in -ing.",7:"Ordinary people = persone comuni.",8:"Presente con we: niente -s."}},
+{ id:20, week:4, weekday:"Venerdì", title:"Travelling around Europe by train", listen:true,
+  vocab:[["route","percorso, itinerario"],["hostel","ostello"],["landscape","paesaggio"],["power bank","batteria portatile"],["to apply","fare domanda"],["ticket","biglietto"]],
+  text:`Have you ever [[1]] about travelling around Europe by train? With an Interrail pass, you can take trains in more than thirty countries with just one ticket. You can choose how many days you want to travel and [[2]] your own route. Many young Europeans do it after school, before they [[3]] university or work. And there's good news: the European Union has a programme called DiscoverEU, which [[4]] free travel passes to eighteen-year-olds. Every year thousands of young people apply and win a pass. Travelling by train is [[5]] than flying, but it pollutes much [[6]], and you can see the landscape change from the window. You also meet other young travellers and [[7]] your English in real situations. Before you leave, make a simple plan, [[8]] a few nights in hostels, and remember to bring a power bank!`,
+  bank:["think","plan","start","give","slow","little","practise","book","fast","forget"],
+  answers:{1:["thought"],2:["plan"],3:["start"],4:["gives"],5:["slower"],6:["less"],7:["practise","practice"],8:["book"]},
+  expl:{1:"Have you ever + participio. Think è irregolare: think, thought, thought.",2:"Forma base, come choose: you can choose ... and plan.",3:"Presente con they: niente -s.",4:"Which si riferisce al programma (singolare): gives.",5:"Comparativo con than: slower than = più lento di.",6:"Less = meno. È il comparativo di little.",7:"Forma base, come meet: you meet ... and practise.",8:"Imperativo, come make: book = prenotare."}}
+];
+
+// ================= SECONDO BRANO DI OGNI GIORNO =================
+// g: "risposta(/alternativa)|forma base|regola|nota"
+const B2 = {
+1:{title:"The Hoover Dam", vocab:[["concrete","calcestruzzo"],["to dig","scavare"]], extra:["wet","lose"],
+text:`The Hoover Dam is one of the most famous engineering projects in the United States. It [[1]] on the Colorado River, on the border between the states of Nevada and Arizona. It was [[2]] between 1931 and 1936, during the Great Depression, when millions of Americans had no job.
+
+The project [[3]] work to thousands of men. The conditions were very hard: in summer the temperature in the canyon was often above 40 degrees, and the workers had to [[4]] tunnels through the rock to move the river away from the building site. About one hundred workers died during the construction.
+
+The dam is made of concrete, and it is more than 200 metres high. Behind it, the water of the river [[5]] Lake Mead, one of the [[6]] artificial lakes in the country. The dam [[7]] electricity for millions of people in Nevada, Arizona and California, and the lake gives water to farms and cities in a very [[8]] region.
+
+Today the Hoover Dam is also a tourist attraction, and many people visit it every year. However, the lake has a big problem. Because of long droughts and climate change, the level of the water has [[9]] a lot in the last twenty years. Experts are worried, because if the water continues to go down, the dam will produce less energy and many cities could have [[10]] problems with water.`,
+g:["stands|stand|s|Stand qui significa trovarsi.","built|build|ppi|","gave|give|psi|","dig|dig|base|Dig = scavare.","formed|form|ps|","largest|large|sup|","produces|produce|s|","dry|dry|adj|Dry = secca, arida.","dropped|drop|pp|La p raddoppia. Drop = scendere, calare.","serious|serious|adj|Serious problems = problemi gravi."]},
+2:{title:"The Morandi Bridge", vocab:[["to collapse","crollare"],["maintenance","manutenzione"]], extra:["fast","forget"],
+text:`On 14 August 2018, part of the Morandi Bridge in Genoa suddenly [[1]]. The bridge was part of a busy motorway, and many cars and trucks were [[2]] it at that moment. Forty-three people died. It was one of the [[3]] tragedies in the recent history of Italy.
+
+The bridge was [[4]] by the engineer Riccardo Morandi and it was opened in 1967. It was famous for its modern shape, but over the years experts had noticed problems with the concrete and with the steel cables [[5]] inside it. Many experts later said that the checks and the maintenance of the bridge were not [[6]] enough.
+
+After the disaster, the old bridge was demolished, and a new one was built in less than two years. It was designed by the architect Renzo Piano, who [[7]] up in Genoa. The new bridge, called Genova San Giorgio, [[8]] in August 2020. It has sensors and robots that check the structure all the time.
+
+The collapse started a national debate about the [[9]] of bridges, tunnels and roads in Italy. Many of them were built in the 1960s and 1970s, and they need regular checks and repairs. For future surveyors and engineers, the lesson is clear: building something is not enough, we must also [[10]] care of it for its whole life.`,
+g:["collapsed|collapse|ps|Collapse = crollare.","crossing|cross|ing|Were + -ing: stavano attraversando.","worst|bad|sup|Bad, worse, the worst.","designed|design|pp|Was designed = fu progettato.","used|use|pp|Cables used inside it = cavi usati al suo interno.","good|good|adj|Good enough = abbastanza buoni.","grew|grow|psi|Grow up = crescere.","opened|open|ps|","safety|safe|wf|Safe (sicuro) → safety (sicurezza).","take|take|base|Take care of = prendersi cura di."]},
+3:{title:"Trees in our cities", vocab:[["shade","ombra"],["leaf","foglia"]], extra:["dirty","cold"],
+text:`When we think about forests, we usually imagine places far away from towns. But trees are also very [[1]] in cities, where most people live today.
+
+First of all, trees [[2]] the air. Their leaves catch dust and absorb some of the gases produced by cars and heating. Trees also make cities [[3]] in summer. Streets with trees can be several degrees cooler than streets without them, because the leaves give shade and release water into the air. With climate change, summers are becoming [[4]], and this effect is more and more useful.
+
+Trees help with rain, too. When it rains [[5]], water runs over asphalt and concrete and can quickly flood the streets. The roots of trees and the soil around them absorb part of this water and slow it down.
+
+There are other benefits. Many studies have [[6]] that people who live near parks and green areas feel less stressed and do more exercise. Birds and insects find food and shelter in city trees, so trees also [[7]] biodiversity.
+
+For these reasons, many cities are [[8]] thousands of new trees. Milan, for example, has a project called ForestaMi, which [[9]] to plant three million trees in the metropolitan area. However, planting is only the first step: young trees need water and care for several years, otherwise they die. Choosing the right species for each place is also [[10]].`,
+g:["important|importance|wf|","clean|clean|pres|Clean qui è un verbo: pulire.","cooler|cool|comp|","hotter|hot|comp|La t raddoppia.","heavily|heavy|adv|Rain heavily = piovere forte.","shown|show|ppi|Show, showed, shown.","increase|increase|pres|Increase = aumentare.","planting|plant|ing|Are + -ing.","aims|aim|s|Aim to = avere lo scopo di.","essential|essential|adj|Essential = fondamentale."]},
+4:{title:"Air pollution in the Po Valley", vocab:[["to surround","circondare"],["traffic","traffico"]], extra:["clean","rise"],
+text:`The Po Valley, in the north of Italy, is one of the most [[1]] areas in Europe. Satellite images often show a grey cloud over the region, especially in winter. Why is the air so bad there?
+
+The main reason is geography. The valley is [[2]] by mountains: the Alps in the north and the Apennines in the south. These mountains block the wind, so the air does not [[3]] much and pollution stays close to the ground. In winter, cold air near the ground is often [[4]] under a layer of warmer air, and the situation gets even worse.
+
+The second reason is that the valley is full of people and activities. Millions of people [[5]] there, and there are many factories, roads and big farms. The pollution comes from traffic, heating systems, industry and also from agriculture, because animal farms release gases into the air.
+
+The most dangerous pollutants are very small particles called PM10 and PM2.5. They are so small that they can [[6]] our lungs and even our blood. For this reason, they can cause [[7]] problems and heart disease.
+
+What can be done? Some cities [[8]] old cars and diesel vehicles on days with high pollution. Regions also give money to families who [[9]] old wood stoves with cleaner systems. Experts say that these are good steps, but real change will take time and will need the [[10]] of everyone.`,
+g:["polluted|pollute|pp|Polluted = inquinate.","surrounded|surround|pp|Is surrounded by = è circondata da.","move|move|base|Dopo does not il verbo resta base.","trapped|trap|pp|La p raddoppia. Trapped = intrappolata.","live|live|pres|","enter|enter|base|Dopo can il verbo resta base.","breathing|breathe|ing|Breathing problems = problemi respiratori.","stop|stop|pres|Stop qui significa bloccare.","replace|replace|pres|Replace = sostituire.","help|help|noun|The help of everyone = l'aiuto di tutti."]},
+5:{title:"How to save water at home", vocab:[["tap","rubinetto"],["leak","perdita"]], extra:["empty","quick"],
+text:`Water is a precious resource, and in many parts of Italy droughts are becoming more frequent. The good news is that everybody can [[1]] at home with a few simple habits.
+
+The first place to look at is the bathroom. A shower uses much [[2]] water than a bath, especially if it is short. Turning off the tap while you [[3]] your teeth can save several litres every time. A dripping tap may seem a small problem, but over a year it can [[4]] thousands of litres, so it is important to repair it quickly.
+
+In the kitchen, dishwashers and washing machines should be used only when they are [[5]]. Modern machines are much more [[6]] than old ones and use less water and electricity. If you wash fruit and vegetables in a bowl instead of under running water, you can use that water again for the plants.
+
+Outside the house, gardens need a lot of water in summer. It is better to water plants early in the morning or in the evening, when it is [[7]] and less water evaporates. Some families [[8]] rainwater in special tanks and use it for the garden.
+
+Finally, there is a problem that we often can't see: leaks. In Italy, old water pipes [[9]] a large part of the water before it arrives in our homes. Repairing the network is a job for public companies, but our daily [[10]] are important too.`,
+g:["help|help|base|","less|little|comp|Less = meno.","brush|brush|pres|","waste|waste|base|Waste = sprecare.","full|full|adj|Full = pieni.","efficient|efficiency|wf|","cooler|cool|comp|","collect|collect|pres|Collect = raccogliere.","lose|lose|pres|","choices|choose|wf|Choose (scegliere) → choices (scelte)."]},
+6:{title:"Dubrovnik and film tourism", vocab:[["walls","mura"],["to manage","gestire"]], extra:["modern","leave"],
+text:`Dubrovnik is a beautiful city on the coast of Croatia. Its old town, surrounded by [[1]] stone walls, is a UNESCO World Heritage Site. For many years it was a popular destination, but in the 2010s the number of visitors [[2]] very quickly. One of the reasons was television: the city was used as a location for the famous series Game of Thrones, and fans from all over the world wanted to [[3]] the places from the show.
+
+This is called film tourism, and it can bring a lot of money. But in Dubrovnik there were also problems. The old town is small, and on some days thousands of cruise passengers [[4]] at the same time. The narrow streets became so [[5]] that it was difficult for residents to walk to work or to school. Many of them [[6]] out of the old town, and their homes became shops and holiday apartments.
+
+In 2017 the city started a project to manage tourism in a more [[7]] way. It decided to limit the number of cruise ships that can stop in the port at the same time, to [[8]] the number of souvenir stalls and to organise the arrival of tour buses better.
+
+Today Dubrovnik is still very popular, but the situation is more under control. Its story shows that a film or a TV series can make a place famous very [[9]], and that local governments must be [[10]] to protect their towns before it is too late.`,
+g:["ancient|ancient|adj|Ancient = antiche.","grew|grow|psi|","see|see|base|","arrived|arrive|ps|","crowded|crowd|wf|Crowd (folla) → crowded (affollato).","moved|move|ps|Move out = trasferirsi.","sustainable|sustainable|adj|Sustainable = sostenibile.","reduce|reduce|base|","quickly|quick|adv|","ready|ready|adj|Ready = pronti."]},
+7:{title:"Tourism in Valtellina", vocab:[["cycle path","pista ciclabile"],["terrace","terrazzamento"]], extra:["cheap","forget"],
+text:`Valtellina is a long valley in the north of Lombardy, in the province of Sondrio. The river Adda [[1]] through it from the Alps to Lake Como. The valley is famous for its mountains, its food and its wine, and tourism is an important part of the local economy.
+
+In winter, thousands of people come to [[2]] in places like Bormio, Livigno and Aprica. In February 2026 Bormio and Livigno also [[3]] some events of the Milano Cortina Winter Olympics, and the valley was [[4]] on television all over the world. In summer, visitors prefer hiking and cycling. The Sentiero Valtellina, a cycle path along the river, is more than 100 km long and is [[5]] for families too.
+
+Food is another reason to visit. Typical dishes like pizzoccheri and products like bresaola and Bitto cheese are [[6]] all over Italy. On the sunny side of the valley, farmers have [[7]] grapes on terraces for centuries. These terraces, supported by kilometres of dry stone walls, create a [[8]] landscape.
+
+One of the most spectacular experiences is the Bernina Express, a red train that goes from Tirano to St. Moritz in Switzerland. The line [[9]] the Alps at more than 2,000 metres, and in 2008 it became a UNESCO World Heritage Site.
+
+Like other mountain areas, Valtellina must find a balance: tourism brings jobs, but it also brings traffic and pressure on nature. Many people believe that the future is quality tourism, which [[10]] the environment and local traditions.`,
+g:["flows|flow|s|Flow = scorrere.","ski|ski|base|","hosted|host|ps|Host = ospitare.","shown|show|ppi|","suitable|suitable|adj|Suitable = adatto.","known|know|ppi|Know, knew, known.","grown|grow|ppi|Grow, grew, grown.","unique|unique|adj|Unique = unico.","crosses|cross|s|Dopo ss si aggiunge -es.","respects|respect|s|Which si riferisce a quality tourism, singolare."]},
+8:{title:"The Stelvio National Park", vocab:[["ibex","stambecco"],["mountain hut","rifugio"]], extra:["young","dangerous"],
+text:`The Stelvio National Park is one of the [[1]] national parks in Italy. It was created in 1935 and today it covers a large area of the Central Alps, between Lombardy and Trentino-Alto Adige. Its territory goes from green valleys to the top of the Ortles, which is almost 4,000 metres [[2]].
+
+The park was created to [[3]] the mountain environment, its plants and its animals. Visitors can often see deer, chamois and ibex, and if they are lucky, also golden eagles flying above the valleys. In spring and summer, the meadows are [[4]] of flowers.
+
+The park also has many glaciers, such as the Forni glacier in Valfurva. Unfortunately, like other glaciers in the Alps, it has become much [[5]] in the last decades because of rising temperatures. Scientists [[6]] these changes carefully, and some paths have been closed because the ice is no longer [[7]].
+
+Every year thousands of tourists visit the park. They can walk on marked paths, sleep in mountain huts and learn about nature in the visitor centres. However, there are rules: you can't pick flowers, you can't feed the animals and you must [[8]] your rubbish home with you.
+
+The challenge for the park is to welcome visitors without [[9]] the environment they come to see. Many experts think that education is the key: if people [[10]] why nature is fragile, they are more likely to respect it.`,
+g:["oldest|old|sup|","high|high|adj|Four thousand metres high = alto quattromila metri.","protect|protect|base|","full|full|adj|Full of = pieno di.","smaller|small|comp|","study|study|pres|","safe|safe|adj|","take|take|base|","damaging|damage|ing|Dopo without il verbo va in -ing.","understand|understand|pres|"]},
+9:{title:"The Great Wall of China", vocab:[["brick","mattone"],["tower","torre"]], extra:["short","sell"],
+text:`The Great Wall of China is not one single wall. It is a [[1]] system of walls, towers and forts that was built over many centuries to protect China from northern invaders. Many of the sections that tourists [[2]] today were built during the Ming dynasty, between the 14th and the 17th century.
+
+The Wall is one of the most visited monuments in the world. The section of Badaling, near Beijing, is the most popular, because it is easy to reach and it was [[3]] many years ago. On holidays it can be extremely [[4]]: photos show thousands of people walking slowly, one behind the other. To solve this problem, the authorities introduced a daily limit, and now visitors must [[5]] their tickets online with their ID.
+
+Other parts of the Wall are in very bad condition. Wind, rain and plants have damaged the stones, and in the past some local people even [[6]] bricks to build their houses. Some tourists also [[7]] their names on the walls, which is forbidden.
+
+Not everyone agrees on how to [[8]] the Wall. Some experts want to rebuild the damaged parts, so that more people can walk on them. Others think it is better to repair them [[9]] and leave them as they are, because they show the real history of the monument.
+
+For tourists, there is a simple solution: visiting less famous sections. They are [[10]], more natural and often more beautiful.`,
+g:["long|long|adj|","visit|visit|pres|","restored|restore|pp|Restore = restaurare.","crowded|crowd|wf|","book|book|base|Book = prenotare.","took|take|psi|","write|write|pres|","save|save|base|","carefully|careful|adv|","quieter|quiet|comp|Quiet = tranquillo."]},
+10:{title:"Cycling holidays", vocab:[["brake","freno"],["tyre","pneumatico"]], extra:["steep","rest"],
+text:`Cycling holidays are becoming more and more popular. Instead of [[1]] from one place to another, cyclists travel slowly, stop in small villages and enjoy the landscape. It is a healthy way to travel, and it [[2]] almost no pollution.
+
+In Europe there is a network of long-distance cycle routes called EuroVelo. Some routes follow big rivers, like the Danube or the Rhine, so they are quite [[3]] and easy. Others cross mountains and are only for [[4]] cyclists. You don't have to do a whole route: many people choose a short section and cycle for a few days.
+
+Before you leave, it is important to [[5]] your bike carefully: brakes, tyres and lights must be in good condition. You should also bring a repair kit, because there isn't always a bike shop nearby. A good map or an app on your phone [[6]] you to follow the route.
+
+Many hotels and campsites now offer special services for cyclists, like safe places to [[7]] the bikes and big breakfasts. In some countries you can also take your bike on trains, so if you get [[8]] or the weather is bad, you can skip part of the route.
+
+Of course, there are some difficulties. Bad weather can make the trip [[9]], and on busy roads cyclists must be very careful. But most people who try a cycling holiday say it is an experience they will never [[10]].`,
+g:["driving|drive|ing|Dopo instead of il verbo va in -ing.","produces|produce|s|","flat|flat|adj|Flat = pianeggiante.","expert|expert|adj|Expert = esperto.","check|check|base|","helps|help|s|","leave|leave|base|","tired|tired|adj|Get tired = stancarsi.","harder|hard|comp|","forget|forget|base|"]},
+11:{title:"Soil, a living resource", vocab:[["handful","manciata"],["to plough","arare"]], extra:["weak","build"],
+text:`When we walk in a field, we don't usually think about what is under our feet. But soil is one of the most important [[1]] on Earth. Almost all the food we eat [[2]] in it, and it is full of life: a handful of healthy soil contains millions of tiny organisms.
+
+Soil is [[3]] very slowly. Rain, wind and changes in temperature break rocks into small pieces, and plants and animals add organic material when they die. It can take hundreds of years to create just one centimetre of fertile soil. This means that, when it is [[4]], we can't replace it in a human lifetime.
+
+Unfortunately, in many parts of the world soil is in danger. Erosion is one of the [[5]] problems: when the land has no plants, wind and water carry the top layer away. This is exactly what [[6]] during the Dust Bowl in the United States in the 1930s. Other threats are pollution from chemicals and the growth of cities, which [[7]] fertile land with concrete and asphalt.
+
+Farmers can protect soil in many ways. They can plant trees as wind breaks, [[8]] crops and avoid leaving fields bare in winter. Some farmers don't plough the land deeply, so the structure of the soil stays [[9]].
+
+Governments also have a role. They can limit new buildings on agricultural land and support farmers who choose more [[10]] methods.`,
+g:["resources|resource|plur|","grows|grow|s|All the food è singolare.","formed|form|pp|","lost|lose|ppi|Lose, lost, lost.","biggest|big|sup|La g raddoppia.","happened|happen|ps|","cover|cover|pres|Which si riferisce a cities, plurale.","rotate|rotate|base|Rotate crops = fare la rotazione delle colture.","healthy|health|wf|Health (salute) → healthy (sano).","sustainable|sustainable|adj|"]},
+12:{title:"Earthquakes and safe buildings", vocab:[["earthquake","terremoto"],["foundations","fondamenta"]], extra:["weak","fall"],
+text:`Italy is one of the countries in Europe with the [[1]] risk of earthquakes. The reason is geological: the African plate is slowly [[2]] against the Eurasian plate, and this movement creates stress in the rocks under the Apennines and in other areas.
+
+In recent years Italy has [[3]] several serious earthquakes. In 2009 an earthquake hit L'Aquila, in Abruzzo, and in 2016 another one [[4]] the town of Amatrice, in Lazio. Each of them caused about 300 deaths. In both cases, many old buildings collapsed, while most modern buildings resisted.
+
+We can't [[5]] earthquakes, but we can build in a way that reduces the damage. Anti-seismic buildings are designed to move and bend without [[6]]. Engineers use reinforced concrete, steel and sometimes special systems under the foundations that absorb the energy of the ground. Even old houses can be made [[7]] by connecting walls and floors with steel ties.
+
+In Italy the government has offered tax benefits to owners who [[8]] the safety of their buildings. Surveyors and engineers have an important job: they check the condition of buildings and suggest the right work.
+
+Prevention also means [[9]] what to do. During an earthquake, experts advise people to stay away from windows and to shelter under a [[10]] table.`,
+g:["highest|high|sup|","pushing|push|ing|Is + -ing.","suffered|suffer|pp|","destroyed|destroy|ps|","predict|predict|base|Predict = prevedere.","breaking|break|ing|Dopo without il verbo va in -ing.","safer|safe|comp|","improve|improve|pres|Improve = migliorare.","knowing|know|ing|Mean + -ing.","strong|strong|adj|"]},
+13:{title:"Recycling in Italy", vocab:[["glass","vetro"],["landfill","discarica"]], extra:["cheap","burn"],
+text:`In Italy, separate waste collection is now part of everyday life. Most towns ask families to [[1]] their rubbish into different groups: paper, plastic, glass, metal, organic waste and general waste. The colours of the bins can be [[2]] from one town to another, so when you move, you must learn the new rules.
+
+Why is it so important? When rubbish is [[3]] correctly, materials can be recycled and used again. Paper becomes new paper and cardboard, glass can be melted and recycled again and again, and organic waste [[4]] compost, a natural fertiliser for fields and gardens. This means that we need fewer raw materials and less energy, and that fewer things [[5]] up in landfills.
+
+In the last twenty years, separate collection in Italy has [[6]] a lot. However, there are still big differences between the north and the south of the country.
+
+Recycling, though, is not the [[7]] solution. It is even better to produce less waste. We can choose products with less packaging, [[8]] objects instead of throwing them away and buy second-hand clothes. This idea is called the circular economy: products and materials should [[9]] in use for as long as possible.
+
+Everybody can do something. A few minutes a day to separate rubbish [[10]] can make a real difference for the environment.`,
+g:["divide|divide|base|","different|difference|wf|","separated|separate|pp|","becomes|become|s|","end|end|pres|End up = finire.","increased|increase|pp|","best|good|sup|Good, better, the best.","repair|repair|base|","stay|stay|base|","carefully|careful|adv|"]},
+14:{title:"Nuclear energy: for and against", vocab:[["power plant","centrale elettrica"],["supporter","sostenitore"]], extra:["cheap","lose"],
+text:`Nuclear energy is one of the most [[1]] topics in the world of energy. After the Chernobyl disaster in 1986 and the Fukushima accident in 2011, many people became [[2]] of it. Italy, for example, closed its nuclear power plants after a referendum in 1987, and in 2011 another referendum [[3]] the return of nuclear energy.
+
+Supporters of nuclear power have some strong arguments. Nuclear plants produce a lot of electricity without [[4]] carbon dioxide, so they can help to fight climate change. They also work day and night, while solar and wind energy [[5]] on the weather. Modern reactors are much safer than the old ones, they say.
+
+Opponents have important arguments too. Nuclear accidents are rare, but when they happen, the consequences can be [[6]] and can last for decades. Nuclear waste stays dangerous for thousands of years, and no country has [[7]] a perfect solution to store it. Building a new plant is also very [[8]] and can take more than ten years.
+
+Today the debate is still open. Some countries, like France, [[9]] most of their electricity with nuclear power, while others, like Germany, have closed all their plants. Many experts agree on one point: the world needs a mix of energy sources, and the [[10]] ones should grow as fast as possible.`,
+g:["debated|debate|pp|Debated = discussi.","afraid|afraid|adj|Be afraid of = avere paura di.","rejected|reject|ps|Reject = respingere.","releasing|release|ing|Dopo without il verbo va in -ing.","depend|depend|pres|Depend on = dipendere da.","terrible|terrible|adj|","found|find|ppi|","expensive|expense|wf|Expense (spesa) → expensive (costoso).","produce|produce|pres|","cleanest|clean|sup|"]},
+15:{title:"How landslides are monitored", vocab:[["slope","pendio"],["sensor","sensore"]], extra:["quick","sell"],
+text:`Landslides are a serious problem in mountain areas like the Alps. They can [[1]] roads, houses and entire villages, and they are often caused by heavy rain, earthquakes or melting ice. For this reason, many dangerous slopes are now [[2]] day and night.
+
+Experts use different instruments. Rain gauges [[3]] how much rain falls, because water in the ground makes slopes less stable. Special sensors placed in holes in the ground show if the rock is moving, even by a few millimetres. GPS stations and radars can [[4]] small movements of the whole slope from a distance.
+
+All this information is sent to a control centre, where technicians [[5]] it. If the movement becomes faster than [[6]], they can close roads and send alarms to the people who live in the area. Sometimes residents must be [[7]] for days or weeks, until the danger is over.
+
+Technology is useful, but it is not the only answer. It is also important to [[8]] building in dangerous places, to keep forests healthy and to maintain the channels that carry rainwater away. In the past, mountain communities took care of their land every day; today, with fewer people living in the mountains, this work is often [[9]].
+
+The Val Pola disaster in 1987 taught Valtellina an important lesson. Since then, monitoring has become more and more [[10]] in the whole province.`,
+g:["destroy|destroy|base|","monitored|monitor|pp|Monitor = sorvegliare, controllare.","measure|measure|pres|Measure = misurare.","detect|detect|base|Detect = rilevare.","analyse/analyze|analyse|pres|","usual|usual|adj|Faster than usual = più veloce del solito.","evacuated|evacuate|pp|","avoid|avoid|base|","forgotten|forget|ppi|Forget, forgot, forgotten.","important|importance|wf|"]},
+16:{title:"Travelling with a smaller carbon footprint", vocab:[["fuel","carburante"],["take-off","decollo"]], extra:["dirty","spend"],
+text:`Every time we travel, we [[1]] greenhouse gases. The total amount of CO2 connected to our activities is called our carbon footprint. Transport is one of the biggest parts of it, so the way we travel really [[2]].
+
+Planes are the [[3]] polluting way to travel per kilometre, especially on short flights, because take-off uses a lot of fuel. Cars are also a problem when only one person is inside. Trains and buses are usually much [[4]], because they carry many passengers at the same time. In Europe, high-speed trains are often a good alternative to planes for journeys of a few hundred kilometres.
+
+But transport is not everything. Where we sleep and what we eat on holiday also [[5]]. Big hotels with air conditioning on all day use a lot of energy, while small guesthouses often have a lower impact. Eating local and seasonal food means that products don't have to [[6]] around the world to reach our plates.
+
+Some people decide to take [[7]] trips but stay longer. Others choose destinations that are closer to home: you don't need to go [[8]] to have a great holiday. And when flying is really necessary, some airlines give the possibility to [[9]] a little more to support environmental projects, although experts say that this does not cancel the damage.
+
+No traveller is perfect, but small changes, if they are [[10]] by millions of people, can make a big difference.`,
+g:["produce|produce|pres|","matters|matter|s|Matter = contare, essere importante.","most|much|sup|The most polluting = il più inquinante.","cleaner|clean|comp|","count|count|pres|Count = contare.","travel|travel|base|","fewer|few|comp|Fewer = meno (con cose che si contano).","far|far|word|Far = lontano.","pay|pay|base|","made|make|ppi|Make, made, made."]},
+17:{title:"Food tourism in Italy", vocab:[["truffle","tartufo"],["winery","cantina"]], extra:["expensive","sell"],
+text:`For many tourists, food is one of the main reasons to visit Italy. Some of them travel only to [[1]] local dishes, visit producers and take cooking classes. This is called food and wine tourism, and it is [[2]] fast.
+
+Every region has its own specialities. In Emilia-Romagna visitors can see how Parmigiano Reggiano is [[3]] and taste traditional balsamic vinegar. In Piedmont they can go to truffle fairs in autumn, and in Sicily they can try street food in the [[4]] markets of Palermo. Wine routes allow tourists to drive or cycle from one winery to another and learn how wine is [[5]].
+
+Many Italian products have special labels, like DOP and IGP. These labels [[6]] that a product comes from a specific area and is made following traditional methods. They protect consumers, but they also protect local producers from [[7]] imitations sold all over the world.
+
+Food tourism can bring money to small towns and rural areas that are not on the usual tourist routes. It also helps to keep [[8]] recipes and techniques alive, because young people see that these skills can [[9]] them a job.
+
+However, there are risks. If a dish becomes too famous, some restaurants may change it to please tourists, and the original recipe can [[10]].`,
+g:["taste|taste|base|Taste = assaggiare.","growing|grow|ing|Is + -ing.","made|make|ppi|","busy|busy|adj|Busy markets = mercati affollati.","produced|produce|pp|","guarantee|guarantee|pres|Guarantee = garantire.","cheaper|cheap|comp|","traditional|tradition|wf|","offer|offer|base|","disappear|disappear|base|"]},
+18:{title:"Disappearing glaciers", vocab:[["to melt","sciogliersi"],["ice","ghiaccio"]], extra:["grow","much"],
+text:`Glaciers are huge masses of ice that move slowly down the mountains. In the Alps they are an important [[1]] of water: in summer, when they melt, they feed rivers and lakes and help farmers and power plants.
+
+Today, however, alpine glaciers are [[2]] very fast. Because of rising temperatures, they lose more ice in summer than they gain in winter. Scientists say that many small glaciers have already [[3]], and that others could disappear by the end of this century.
+
+The summer of 2022 was particularly bad. It was very hot and there had been [[4]] snow in winter. On 3 July 2022, a large piece of the Marmolada glacier in the Dolomites suddenly [[5]] off. Ice and rocks fell down the mountain and [[6]] eleven hikers. The tragedy showed that melting glaciers can also become dangerous.
+
+In Valtellina, the Forni glacier, in the Stelvio National Park, is one of the most [[7]] in Italy. Researchers measure it every year, and the results are worrying: its front has moved back by hundreds of metres.
+
+What can we do? Reducing emissions is the most important answer, but it will take time. Meanwhile, some ski areas cover parts of glaciers with white sheets in summer to [[8]] sunlight and slow down melting. This can protect small areas, but it can't [[9]] all the glaciers.
+
+For people who love the mountains, the message is clear: we must change our habits now, before these [[10]] landscapes are lost forever.`,
+g:["source|source|noun|Source = fonte.","shrinking|shrink|ing|Shrink = ridursi.","disappeared|disappear|pp|","little|little|word|Little si usa con le cose che non si contano, come snow.","broke|break|psi|Break off = staccarsi.","killed|kill|ps|","studied|study|pp|La y diventa ied.","reflect|reflect|base|Reflect = riflettere.","save|save|base|","beautiful|beauty|wf|Beauty (bellezza) → beautiful (bello)."]},
+19:{title:"Goal 15: Life on Land", vocab:[["wetland","zona umida"],["hunting","caccia"]], extra:["hunt","cheap"],
+text:`Goal 15 of the 2030 Agenda is called 'Life on Land'. Its aim is to protect, restore and use land ecosystems in a sustainable way. These include forests, mountains, wetlands and deserts, and all the plants and animals that [[1]] in them.
+
+Forests are at the centre of this goal. They [[2]] about a third of the Earth's land and are home to most land animals and plants. Every year, however, millions of hectares of forest are [[3]], mainly to make space for farms.
+
+Another target of Goal 15 is to stop desertification and to [[4]] land that has been damaged by drought, erosion or bad farming practices, like the land of the American Dust Bowl. Healthy soil is [[5]] to produce food for a growing population.
+
+Biodiversity is the third big topic. Scientists warn that many species are in danger of extinction because of the [[6]] of their habitats, pollution, climate change and illegal hunting. When a species [[7]], the whole ecosystem can suffer, because every living thing has a role in it.
+
+What can young people do? They can [[8]] projects to plant trees or clean natural areas, avoid buying products made from endangered animals and plants, and choose food that is [[9]] in a sustainable way. They can also study these topics: jobs connected to land management, like surveyors, agronomists and environmental technicians, will be more and more [[10]] in the future.`,
+g:["live|live|pres|","cover|cover|pres|","lost|lose|ppi|","restore|restore|base|Restore = ripristinare.","necessary|necessity|wf|","destruction|destroy|wf|Destroy (distruggere) → destruction (distruzione).","disappears|disappear|s|","join|join|base|Join = partecipare, unirsi a.","produced|produce|pp|","important|importance|wf|"]},
+20:{title:"Erasmus+: studying and training abroad", vocab:[["abroad","all'estero"],["lonely","solo, solitario"]], extra:["small","forget"],
+text:`Erasmus started in 1987 as a programme for university students who wanted to [[1]] part of their studies in another European country. Since then, millions of young people have [[2]] part in it, and many of them say that it changed their lives.
+
+Today the programme is called Erasmus+, and it is much [[3]]. It is not only for university students: it also offers opportunities to school students, teachers, apprentices and young people in vocational training. Students of technical schools, for example, can do a work placement in a company abroad and [[4]] new skills in a real workplace.
+
+Living abroad is not always easy. At the beginning, many students feel lonely and [[5]] it difficult to understand the language. But after a few weeks, most of them start to feel at home. They make friends from different countries, learn to [[6]] problems on their own and become more independent.
+
+There are also practical advantages. Companies often prefer candidates who have [[7]] or studied abroad, because they can speak foreign languages and adapt to new situations. And English is [[8]] everywhere: even in countries like Spain or Germany, Erasmus students often use it to communicate with each other.
+
+If you are interested, the first step is to ask your school. Many schools take part in Erasmus+ projects, and teachers can tell you how to [[9]]. Don't be afraid if your English is not perfect: the best way to improve it is to [[10]] it.`,
+g:["spend|spend|base|","taken|take|ppi|Take part = partecipare.","bigger|big|comp|La g raddoppia.","learn|learn|base|","find|find|pres|Find it difficult = trovare difficile.","solve|solve|base|Solve = risolvere.","worked|work|pp|","essential|essential|adj|","apply|apply|base|Apply = fare domanda.","use|use|base|"]}
+};
+
+const WEEKS = {1:"Settimana 1: disasters (Unit 3)", 2:"Settimana 2: tourism (Unit 2)", 3:"Settimana 3: land, water and disasters (Unit 3)", 4:"Settimana 4: travel and responsible tourism (Unit 2)"};
+const TIPS = {
+  "Lunedì":"Leggi prima tutto il testo. Poi, per ogni spazio, chiediti: serve un verbo, un nome, un aggettivo o un avverbio?",
+  "Martedì":"Guarda la parola prima dello spazio. Dopo to, can, must, don't serve il verbo base. Dopo has, have, was, were spesso serve il participio.",
+  "Mercoledì":"Controlla il tempo del testo: se si parla del passato, il verbo va al past simple. Attento agli irregolari (fall → fell, find → found).",
+  "Giovedì":"Al presente, dopo he, she, it o un nome singolare, il verbo prende la -s (it seems, nobody waters). Con i plurali no.",
+  "Venerdì":"Nel primo testo: leggi e prova a riempire gli spazi da solo, poi ascolta e controlla, anche con la versione lenta."
+};
+const RULES = {
+  ps:(b,a)=>`Past simple regolare: ${b} → ${a}.`,
+  psi:(b,a)=>`Past simple irregolare: ${b} → ${a}.`,
+  pp:(b,a)=>`Participio passato (dopo is, are, was, were, been, has, have): ${b} → ${a}.`,
+  ppi:(b,a)=>`Participio passato irregolare: ${b} → ${a}.`,
+  base:(b,a)=>`Il verbo resta nella forma base (${a}), perché viene dopo to, can, must, should, will, don't o un altro verbo base.`,
+  s:(b,a)=>`Presente con soggetto singolare (he, she, it o un nome singolare): aggiungi -s → ${a}.`,
+  pres:(b,a)=>`Presente con I, you, we, they o un soggetto plurale: niente -s → ${a}.`,
+  ing:(b,a)=>`Serve la forma in -ing: ${b} → ${a}.`,
+  comp:(b,a)=>`Comparativo: ${b} → ${a}.`,
+  sup:(b,a)=>`Superlativo: ${b} → ${a}.`,
+  adv:(b,a)=>`Avverbio in -ly, perché descrive un verbo: ${b} → ${a}.`,
+  adj:(b,a)=>`Serve un aggettivo: ${a}.`,
+  noun:(b,a)=>`Serve un nome: ${a}.`,
+  plur:(b,a)=>`Serve il plurale: ${b} → ${a}.`,
+  wf:(b,a)=>`Bisogna cambiare tipo di parola: ${b} → ${a}.`,
+  word:(b,a)=>`Serve la parola ${a}.`
+};
+// Costruisce i due brani di ogni giorno
+DAYS.forEach(d=>{
+  const p1 = {title:d.title, text:d.text, bank:d.bank, answers:d.answers, expl:d.expl, listen:!!d.listen};
+  const s = B2[d.id];
+  const p2 = {title:s.title, text:s.text, answers:{}, expl:{}, bank:[], listen:false};
+  s.g.forEach((row,i)=>{
+    const [ans,base,rule,note] = row.split("|");
+    const n = i+1;
+    p2.answers[n] = ans.split("/");
+    p2.bank.push(base);
+    p2.expl[n] = RULES[rule](base, p2.answers[n][0]) + (note ? " " + note : "");
+  });
+  p2.bank = p2.bank.concat(s.extra);
+  d.parts = [p1, p2];
+  d.allVocab = d.vocab.concat(s.vocab);
+});
+// Elenco di tutti i significati, per le risposte sbagliate delle parole nuove
+const ALLV = [];
+DAYS.forEach(d=>d.allVocab.forEach(([en,it])=>ALLV.push({en, it, day:d.id, verb:/^to /.test(en)})));
+
+// ================= SALVATAGGIO =================
+const KEY = "inglese_b1_progressi_v3";
+let memStore = {};
+function storageOk(){ try{ const k="__t"; window.localStorage.setItem(k,"1"); const ok = window.localStorage.getItem(k)==="1"; window.localStorage.removeItem(k); return ok; }catch(e){ return false; } }
+function load(){ try{ const v = window.localStorage.getItem(KEY); if(v) return JSON.parse(v); }catch(e){} return JSON.parse(JSON.stringify(memStore)); }
+function save(p){ memStore = p; try{ window.localStorage.setItem(KEY, JSON.stringify(p)); }catch(e){} }
+
+const app = document.getElementById("app");
+let cur = null;
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function goTop(){ try{ window.scrollTo(0,0); }catch(e){} }
+function norm(s){ return String(s||"").trim().toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g," "); }
+
+// ================= HOME =================
+function home(){
+  stopSpeak();
+  const p = load();
+  const next = DAYS.find(d=>!(p[d.id] && p[d.id].done));
+  let h = `<h1><span class="mark">Inglese B1: 20 minuti al giorno</span></h1>
+  <p class="muted">Ogni giorno: due testi bucati da completare e poi 8 parole nuove. Fai un giorno alla volta, in ordine.</p>`;
+  if(!storageOk()){
+    h += `<div class="box warn"><b>Attenzione: qui i progressi non si salvano.</b><br>Apri la pagina dal link nel browser (Safari o Chrome), non dall'anteprima di WhatsApp.</div>`;
+  }
+  if(next) h += `<button class="btn" data-go="${next.id}">Inizia il giorno ${next.id}</button>`;
+  else h += `<div class="box tip"><b>Hai finito tutti i giorni!</b> Puoi rifare quelli dove hai sbagliato di più.</div>`;
+  [1,2,3,4].forEach(w=>{
+    h += `<h2>${WEEKS[w]}</h2>`;
+    DAYS.filter(d=>d.week===w).forEach(d=>{
+      const r = p[d.id];
+      const done = r && r.done;
+      const cls = done ? "day done" : (next && next.id===d.id ? "day next" : "day");
+      h += `<button class="${cls}" data-go="${d.id}">
+        <span class="n">${d.id}</span>
+        <span class="t"><b>${esc(d.parts[0].title)}</b><small>${d.weekday}: ${d.listen?"ascolto + ":""}${esc(d.parts[1].title)}</small></span>
+        ${done ? `<span class="score">${r.e}/${r.en}</span>` : ""}
+      </button>`;
+    });
+  });
+  h += `<button class="reset" id="reset">Cancella tutti i risultati</button>`;
+  app.innerHTML = h; goTop();
+  app.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>startDay(+b.dataset.go)));
+  document.getElementById("reset").addEventListener("click",()=>{
+    let ok = true; try{ ok = confirm("Vuoi cancellare tutti i risultati salvati?"); }catch(e){}
+    if(ok){ save({}); home(); }
+  });
+}
+
+function header(step){
+  const d = cur.d;
+  const labels = [d.listen ? "1. Ascolto e testo" : "1. Primo testo", "2. Secondo testo", "3. Parole nuove"];
+  return `<button class="back" id="back">‹ Tutti i giorni</button>
+  <p class="muted" style="margin:6px 0 0">Giorno ${d.id}, ${d.weekday}</p>
+  <div class="steps">${labels.map((l,i)=>`<span class="${step===i+1?"on":""}">${l}</span>`).join("")}</div>`;
+}
+function bindBack(){ const b=document.getElementById("back"); if(b) b.addEventListener("click",home); }
+
+// ================= TESTI BUCATI =================
+function startDay(id){
+  const d = DAYS.find(x=>x.id===id);
+  cur = {d, k:0, e:0, en:0};
+  renderText();
+}
+function renderBody(text){
+  return text.split(/\n\s*\n/).map(block=>{
+    const lines = block.split("\n");
+    let out = "";
+    if(lines[0].startsWith("## ")){ out += `<h3>${esc(lines.shift().slice(3))}</h3>`; }
+    let t = esc(lines.join(" "));
+    t = t.replace(/\[\[(\d+)\]\]/g,(m,n)=>`<span class="gapn">(${n})</span> <input class="gap" data-n="${n}" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" aria-label="Spazio ${n}">`);
+    return out + `<p lang="en">${t}</p>`;
+  }).join("");
+}
+function scriptOf(part){ return part.text.replace(/^## .*$/gm,"").replace(/\[\[(\d+)\]\]/g,(m,n)=>part.answers[n][0]).replace(/\s+/g," ").trim(); }
+function renderText(){
+  const d = cur.d, part = d.parts[cur.k];
+  let h = header(cur.k+1) + `<h1><span class="mark">${esc(part.title)}</span></h1>`;
+  if(cur.k===0) h += `<div class="box tip"><b>Il trucco di oggi</b><br>${esc(TIPS[d.weekday])}</div>`;
+  h += `<p><b>${part.listen?"Leggi il testo, poi ascoltalo. ":""}Completa ogni spazio con una parola del riquadro, nella forma giusta: verbo coniugato, plurale, comparativo, avverbio, parola derivata... Ci sono 2 parole in più.</b></p>
+    <div class="box"><div class="bank" lang="en">${shuffle(part.bank).map(w=>`<span>${esc(w)}</span>`).join("")}</div></div>`;
+  if(part.listen){
+    h += `<div class="box"><div class="player">
+        <button class="btn" type="button" id="play">▶ Ascolta</button>
+        <button class="btn alt" type="button" id="slow">Ascolta più lento</button>
+        <button class="btn alt" type="button" id="stop">■ Stop</button>
+      </div><p class="muted" id="sp-msg">Se non senti nulla, alza il volume e controlla che il telefono non sia in silenzioso.</p></div>`;
+  }
+  h += `<div class="box text">${renderBody(part.text)}</div>
+    <button class="btn" id="check">Controlla le risposte</button><div id="res"></div>`;
+  app.innerHTML = h; goTop(); bindBack();
+  if(part.listen){
+    document.getElementById("play").addEventListener("click",()=>speak(0.95));
+    document.getElementById("slow").addEventListener("click",()=>speak(0.72));
+    document.getElementById("stop").addEventListener("click",stopSpeak);
+  }
+  document.getElementById("check").addEventListener("click", checkText);
+}
+function checkText(){
+  const d = cur.d, part = d.parts[cur.k]; let ok=0, tot=0; const fb=[];
+  Object.keys(part.answers).forEach(n=>{
+    tot++;
+    const el = document.querySelector(`input.gap[data-n="${n}"]`);
+    const val = norm(el.value);
+    const good = part.answers[n].includes(val);
+    if(good) ok++;
+    el.classList.add(good?"ok":"ko"); el.readOnly = true;
+    fb.push({n, good, given:el.value.trim(), sol:part.answers[n].join(" / "), ex:part.expl[n]});
+  });
+  stopSpeak();
+  cur.e += ok; cur.en += tot;
+  const p = load(); p[d.id] = Object.assign({}, p[d.id]||{}, {e:cur.e, en:cur.en, il:new Date().toISOString().slice(0,10)}); save(p);
+  document.getElementById("check").remove();
+  const pct = ok/tot;
+  const msg = pct>=0.8 ? "Ottimo lavoro!" : pct>=0.5 ? "Bene. Leggi con calma le spiegazioni degli errori." : "Leggi bene le spiegazioni: domani rifai questo testo.";
+  let h = `<div class="box"><div class="result">${esc(part.title)}: ${ok} su ${tot}</div><p>${msg}</p></div><h2>Le spiegazioni</h2><ul class="fb">`;
+  fb.forEach(f=>{ h += `<li class="${f.good?"ok":"ko"}"><b>(${f.n}) ${f.good?"Giusto":"Sbagliato"}.</b> ${!f.good && f.given?`Hai scritto: <span lang="en">${esc(f.given)}</span>. `:""}Risposta: <b lang="en">${esc(f.sol)}</b><br>${esc(f.ex)}</li>`; });
+  h += `</ul><button class="btn" id="nextstep">${cur.k===0?"Vai al secondo testo":"Vai alle parole nuove"}</button>`;
+  document.getElementById("res").innerHTML = h;
+  document.getElementById("nextstep").addEventListener("click", ()=>{ if(cur.k===0){ cur.k=1; renderText(); } else startVocab(); });
+}
+
+// ================= ASCOLTO =================
+function pickVoice(){
+  try{ const vs = window.speechSynthesis.getVoices(); return vs.find(v=>/en[-_]GB/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null; }catch(e){ return null; }
+}
+function speak(rate){
+  const msg = document.getElementById("sp-msg");
+  try{
+    if(!window.speechSynthesis) throw new Error("no");
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(scriptOf(cur.d.parts[cur.k]));
+    u.lang = "en-GB"; u.rate = rate;
+    const v = pickVoice(); if(v) u.voice = v;
+    window.speechSynthesis.speak(u);
+  }catch(e){ if(msg) msg.textContent = "Qui l'audio non funziona. Apri la pagina nel browser (Safari o Chrome)."; }
+}
+function stopSpeak(){ try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){} }
+try{ if(window.speechSynthesis) window.speechSynthesis.getVoices(); }catch(e){}
+
+// ================= PAROLE NUOVE =================
+// Le risposte sbagliate vengono da parole di altri giorni, sempre diverse,
+// così non si può indovinare per esclusione.
+function startVocab(){
+  const d = cur.d;
+  const todayIt = new Set(d.allVocab.map(v=>v[1]));
+  const used = new Set();
+  cur.qs = shuffle(d.allVocab).map(([en,it])=>{
+    const isVerb = /^to /.test(en);
+    let pool = ALLV.filter(x=>x.day!==d.id && !todayIt.has(x.it) && !used.has(x.it) && x.verb===isVerb);
+    if(pool.length<3) pool = ALLV.filter(x=>x.day!==d.id && !todayIt.has(x.it) && !used.has(x.it));
+    const seen = new Set(); const wrong = [];
+    for(const x of shuffle(pool)){ if(!seen.has(x.it)){ seen.add(x.it); wrong.push(x.it); } if(wrong.length===3) break; }
+    wrong.forEach(w=>used.add(w));
+    return {en, it, opts: shuffle([it, ...wrong])};
+  });
+  cur.i = 0; cur.v = 0;
+  renderVocab();
+}
+function renderVocab(){
+  const q = cur.qs[cur.i];
+  app.innerHTML = header(3) + `<h1><span class="mark">Parole nuove</span></h1><div class="box">
+    <p class="muted">Parola ${cur.i+1} di ${cur.qs.length}. Cosa significa?</p>
+    <div class="word" lang="en">${esc(q.en)}</div>
+    <div id="opts">${q.opts.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div>
+    <div id="after"></div></div>`;
+  goTop(); bindBack();
+  document.querySelectorAll("#opts .opt").forEach(b=>b.addEventListener("click",()=>answerVocab(+b.dataset.k)));
+}
+function answerVocab(k){
+  const q = cur.qs[cur.i];
+  const btns = document.querySelectorAll("#opts .opt");
+  btns.forEach((b,j)=>{ b.disabled=true; if(q.opts[j]===q.it) b.classList.add("ok"); });
+  const right = q.opts[k]===q.it;
+  if(right) cur.v++; else btns[k].classList.add("ko");
+  const last = cur.i===cur.qs.length-1;
+  document.getElementById("after").innerHTML =
+    `<p><b>${right?"Giusto!":"Non proprio."}</b> <span lang="en">${esc(q.en)}</span> = ${esc(q.it)}</p>
+     <button class="btn" id="nx">${last?"Fine":"Avanti"}</button>`;
+  document.getElementById("nx").addEventListener("click",()=>{ if(last) finish(); else { cur.i++; renderVocab(); } });
+}
+function finish(){
+  const d = cur.d;
+  const p = load(); p[d.id] = Object.assign({}, p[d.id]||{}, {e:cur.e, en:cur.en, v:cur.v, vn:cur.qs.length, done:true}); save(p);
+  const nextDay = DAYS.find(x=>x.id===d.id+1);
+  app.innerHTML = header(3) + `<h1><span class="mark">Giorno ${d.id} completato!</span></h1><div class="box">
+    <p>Testi: ${cur.e} su ${cur.en}<br>Parole: ${cur.v} su ${cur.qs.length}</p>
+    <p class="muted">${nextDay?"Domani ti aspetta: "+esc(nextDay.parts[0].title)+".":"Era l'ultimo giorno. Bravo!"}</p></div>
+    <button class="btn" id="home2">Torna ai giorni</button>
+    <button class="btn alt" id="redo">Rifai questo giorno</button>`;
+  goTop(); bindBack();
+  document.getElementById("home2").addEventListener("click",home);
+  document.getElementById("redo").addEventListener("click",()=>startDay(d.id));
+}
+
+try{ home(); }catch(e){ app.innerHTML = "<p>Errore nel caricamento: " + esc(e && e.message ? e.message : e) + "</p>"; }
+
+</script>
+</body>
+</html>
